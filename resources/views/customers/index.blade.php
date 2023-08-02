@@ -2,6 +2,7 @@
 
 @section('content')
   <h1>Customers</h1>
+  <h5>Please setup Email before Sending mail</h5>
   <a href="{{ route('customers.create') }}" class="btn btn-primary mb-3">Add Customer</a>
   <table class="table">
     <thead>
