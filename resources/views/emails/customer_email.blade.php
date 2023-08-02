@@ -2,13 +2,13 @@
 <html>
 
 <head>
-  <title>Email to Customer</title>
+  <title>{{ $subject }}</title>
 </head>
 
 <body>
   <h1>Hello, {{ $customer->name }}!</h1>
-  <p>This is an email sent from our application to you.</p>
-  <!-- Add more content here if needed -->
+  <h4>{{ $subject }}</h4>
+  <p>{{ $content }}</p>
 </body>
 
 </html>

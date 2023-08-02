@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Mail\CustomerEmail;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class CustomerController extends Controller
@@ -67,12 +68,23 @@ class CustomerController extends Controller
             ->with('success', 'Customer deleted successfully.');
     }
 
-    public function sendEmail(Customer $customer)
+    public function sendEmailForm(Customer $customer)
     {
+        return view('customers.send_email', compact('customer'));
+    }
+
+    public function sendEmail(Request $request, Customer $customer)
+    {
+        $data = $request->validate([
+            'subject' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
         try {
-            Mail::to($customer->email)->send(new CustomerEmail($customer));
+            Mail::to($customer->email)->send(new CustomerEmail($customer, $data['subject'], $data['content']));
             return redirect()->route('customers.index')->with('success', 'Email sent successfully.');
         } catch (\Exception $e) {
+            Log::info($e);
             return redirect()->route('customers.index')->with('error', 'Failed to send email. Please try again.');
         }
     }

@@ -25,7 +25,7 @@
           <td>
             <a href="{{ route('customers.show', $customer) }}" class="btn btn-info">View</a>
             <a href="{{ route('customers.edit', $customer) }}" class="btn btn-warning">Edit</a>
-            <a href="{{ route('customers.sendEmail', $customer->id) }}" class="btn btn-success">Send Email</a>
+            <a href="{{ route('customers.sendEmailForm', $customer) }}" class="btn btn-success">Send Email</a>
             <form action="{{ route('customers.destroy', $customer) }}" method="POST" style="display: inline-block;">
               @csrf
               @method('DELETE')

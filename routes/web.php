@@ -41,4 +41,5 @@ Route::put('/customers/{customer}', [CustomerController::class, 'update'])->name
 // Delete Customer
 Route::delete('/customers/{customer}', [CustomerController::class, 'destroy'])->name('customers.destroy');
 
-Route::get('customers/{customer}/send-email', [CustomerController::class, 'sendEmail'])->name('customers.sendEmail');
+Route::get('customers/{customer}/send-email', [CustomerController::class, 'sendEmailForm'])->name('customers.sendEmailForm');
+Route::post('customers/{customer}/send-email', [CustomerController::class, 'sendEmail'])->name('customers.sendEmail');
