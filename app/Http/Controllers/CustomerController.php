@@ -1,8 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Mail\CustomerEmail;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CustomerController extends Controller
 {
@@ -63,5 +65,15 @@ class CustomerController extends Controller
 
         return redirect()->route('customers.index')
             ->with('success', 'Customer deleted successfully.');
+    }
+
+    public function sendEmail(Customer $customer)
+    {
+        try {
+            Mail::to($customer->email)->send(new CustomerEmail($customer));
+            return redirect()->route('customers.index')->with('success', 'Email sent successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('customers.index')->with('error', 'Failed to send email. Please try again.');
+        }
     }
 }

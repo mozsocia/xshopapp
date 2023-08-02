@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('customers.index');
 });
 
 // routes/web.php
@@ -40,3 +40,5 @@ Route::put('/customers/{customer}', [CustomerController::class, 'update'])->name
 
 // Delete Customer
 Route::delete('/customers/{customer}', [CustomerController::class, 'destroy'])->name('customers.destroy');
+
+Route::get('customers/{customer}/send-email', [CustomerController::class, 'sendEmail'])->name('customers.sendEmail');
